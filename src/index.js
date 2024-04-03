@@ -6,10 +6,22 @@ import "./index.css";
 const App = () => {
   const [pets, setPets] = useState([]);
 
+  // useEffect(() => {
+  //   fetch("http://localhost:3001/pets")
+  //     .then((res) => res.json())
+  //     .then((pets) => setPets(pets));
+  // }, []);
+
+  // Using Async Await
+  // Note the use of the keyword:  async
+  // res is SHORT for response
   useEffect(() => {
-    fetch("http://localhost:3001/pets")
-      .then((res) => res.json())
-      .then((pets) => setPets(pets));
+    async function getData() {
+      const res = await fetch("http://localhost:3001/pets");
+      const pets = await res.json();
+      setPets(pets);
+    }
+    getData();
   }, []);
 
   return (
