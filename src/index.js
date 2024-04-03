@@ -1,17 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import { useEffect, useState } from "react";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 
+// Destructure State and create State
 const App = () => {
+  const [pets, setPets] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/pets")
+      .then((res) => res.json())
+      .then((pets) => setPets(pets));
+  }, []);
+
   return (
     <main>
       <h1>Adopt-a-Pet</h1>
-      <ul>
-        <li>pets go here</li>
-      </ul>
+      <pre>{JSON.stringify(pets, null, 2)}</pre>
       <button>Add a Pet</button>
     </main>
   );
 };
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(<App />);
