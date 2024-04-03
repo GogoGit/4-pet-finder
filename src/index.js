@@ -3,15 +3,21 @@ import { createRoot } from "react-dom/client";
 import { Pet } from "./Pet";
 import "./index.css";
 
-// Destructure State and create State
 const App = () => {
+  // Destructure State and create State
   const [pets, setPets] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   fetch("http://localhost:3001/pets")
-  //     .then((res) => res.json())
-  //     .then((pets) => setPets(pets));
-  // }, []);
+  useEffect(() => {
+    async function getData() {
+      setLoading(true);
+      const res = await fetch("http://localhost:3001/pets");
+      const pets = await res.json();
+      setPets(pets);
+      setLoading(false);
+    }
+    getData();
+  }, []);
 
   // Using Async Await
   // Note the use of the keyword:  async
