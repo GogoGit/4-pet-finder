@@ -11,10 +11,15 @@ const App = () => {
   useEffect(() => {
     async function getData() {
       setLoading(true);
-      const res = await fetch("http://localhost:3001/pets");
-      const pets = await res.json();
-      setPets(pets);
-      setLoading(false);
+
+      try {
+        const res = await fetch("http://localhost:3001/pets");
+        const pets = await res.json();
+        setPets(pets);
+        setLoading(false);
+      } catch (e) {
+        setLoading(false);
+      }
     }
     getData();
   }, []);
