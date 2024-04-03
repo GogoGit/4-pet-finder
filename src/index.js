@@ -34,13 +34,20 @@ const App = () => {
   return (
     <main>
       <h1>Adopt-a-Pet</h1>
-      {/* <pre>{JSON.stringify(pets, null, 2)}</pre> */}
-      {pets.map((pet) => (
-        <li key={pet.id}>
-          <Pet pet={pet} />
-        </li>
-      ))}
-      <button>Add a Pet</button>
+      {isLoading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <>
+          <ul>
+            {pets.map((pet) => (
+              <li key={pet.id}>
+                <Pet pet={pet} />
+              </li>
+            ))}
+          </ul>
+          <button>Add a Pet</button>
+        </>
+      )}
     </main>
   );
 };
