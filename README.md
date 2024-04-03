@@ -1,3 +1,5 @@
+Error Message Note run the following in a new Terminal: npm install @babel/plugin-proposal-private-property-in-object
+
 # React and CRUD APIs
 
 ## Starter
