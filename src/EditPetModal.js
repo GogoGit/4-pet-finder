@@ -14,6 +14,7 @@ const EditPetModal = ({ pet, onCancel, onSave }) => {
     event.preventDefault();
     setSaving(true);
     onSave({
+      ...pet, //This is how we are getting the pet id back in???
       name,
       kind,
       photo,

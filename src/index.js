@@ -4,7 +4,8 @@ import Modal from "react-modal";
 import NewPetModal from "./NewPetModal";
 import EditPetModal from "./EditPetModal";
 import { Pet } from "./Pet";
-import { listPets, createPet } from "./api";
+// import { listPets, createPet } from "./api";
+import { listPets, createPet, updatePet } from "./api";
 
 import "./index.css";
 
@@ -76,6 +77,14 @@ const App = () => {
 
   const savePet = async (pet) => {
     console.log("editing a pet", pet);
+
+    return updatePet(pet).then((updatedPet) => {
+      // Here we need to find the pet we need to udpate (Looping through all records is not optimal)
+      setPets((pets) =>
+        pets.map((pet) => (pet.id === updatedPet.id ? updatedPet : pet))
+      );
+    });
+    setCurrentPet(null);
   };
 
   return (
