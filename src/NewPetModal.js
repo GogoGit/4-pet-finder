@@ -14,12 +14,6 @@ const NewPetModal = ({ onCancel, onSave }) => {
   const submit = (event) => {
     event.preventDefault();
     setSaving(true);
-    // this is the short cut for
-    /* onSave({
-        name:name,
-        kind:kind,
-        photo:photo,
-    });  */
     onSave({
       name,
       kind,
@@ -42,8 +36,6 @@ const NewPetModal = ({ onCancel, onSave }) => {
   };
 
   return (
-    // index.js, we commented out this line 'isOpen={isNewPetOpen}' so we need to set this 'isOpen' to "true" vs "isOpen"
-    // <Modal isOpen={isOpen} onRequestClose={onCancel}>
     <Modal isOpen={true} onRequestClose={onCancel}>
       <h2>New Pet</h2>
       <form className="pet-form" onSubmit={submit}>
