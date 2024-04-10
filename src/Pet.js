@@ -1,3 +1,4 @@
+//Note we desctructured props here.
 export const Pet = ({ pet, onEdit, onRemove }) => {
   return (
     <div className="pet">

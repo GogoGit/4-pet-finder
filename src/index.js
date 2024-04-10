@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
+import NewPetModal from "./NewPetModal";
+import Modal from "react-modal";
 import { Pet } from "./Pet";
 import "./index.css";
 
@@ -7,6 +9,7 @@ const App = () => {
   // Destructure State and create State
   const [pets, setPets] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [isNewPetOpen, setNewPetOpen] = useState(false);
 
   useEffect(() => {
     async function getData() {
@@ -17,7 +20,8 @@ const App = () => {
         const pets = await res.json();
         setPets(pets);
         setLoading(false);
-      } catch (e) {
+      } catch (err) {
+        console.warn(err);
         setLoading(false);
       }
     }
@@ -36,6 +40,20 @@ const App = () => {
     getData();
   }, []);
 
+  const addPet = async ({ name, kind, photo }) => {
+    // spread Operator
+    setPets([
+      ...pets,
+      {
+        id: Math.random(),
+        name,
+        kind,
+        photo,
+      },
+    ]);
+    setNewPetOpen(false);
+  };
+
   return (
     <main>
       <h1>Adopt-a-Pet</h1>
@@ -50,13 +68,30 @@ const App = () => {
               </li>
             ))}
           </ul>
-          <button>Add a Pet</button>
+          <button onClick={() => setNewPetOpen(true)}>Add a Pet</button>
         </>
+      )}
+
+      {/* replace with NewPetModal */}
+      {/* <Modal isOpen={isNewPetOpen} onRequestClose={() => setNewPetOpen(false)}>
+        hello
+      </Modal> */}
+
+      {/* We need this condition to prevent the form from Rendering all the time and saving the data you enter.
+        Remove this and add a pet and cancel, then add again and you'll see that the form is not cleared.  It
+        has the old data!!!!*/}
+      {isNewPetOpen && (
+        <NewPetModal
+          // isOpen={isNewPetOpen}
+          onSave={addPet}
+          onCancel={() => setNewPetOpen(false)}
+        />
       )}
     </main>
   );
 };
 
 const container = document.getElementById("root");
+Modal.setAppElement(container);
 const root = createRoot(container);
 root.render(<App />);
