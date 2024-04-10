@@ -1,11 +1,10 @@
 import { useState, useRef } from "react";
 import Modal from "react-modal";
 
-// const NewPetModal = ({ isOpen, onCancel, onSave }) => {
-const NewPetModal = ({ onCancel, onSave }) => {
-  const [name, setName] = useState("");
-  const [kind, setKind] = useState("");
-  const [photo, setPhoto] = useState(null);
+const EditPetModal = ({ pet, onCancel, onSave }) => {
+  const [name, setName] = useState(pet.name);
+  const [kind, setKind] = useState(pet.kind);
+  const [photo, setPhoto] = useState(pet.photo);
 
   const [errors, setErrors] = useState(null);
   const [saving, setSaving] = useState(false);
@@ -14,12 +13,6 @@ const NewPetModal = ({ onCancel, onSave }) => {
   const submit = (event) => {
     event.preventDefault();
     setSaving(true);
-    // this is the short cut for
-    /* onSave({
-        name:name,
-        kind:kind,
-        photo:photo,
-    });  */
     onSave({
       name,
       kind,
@@ -42,10 +35,8 @@ const NewPetModal = ({ onCancel, onSave }) => {
   };
 
   return (
-    // index.js, we commented out this line 'isOpen={isNewPetOpen}' so we need to set this 'isOpen' to "true" vs "isOpen"
-    // <Modal isOpen={isOpen} onRequestClose={onCancel}>
     <Modal isOpen={true} onRequestClose={onCancel}>
-      <h2>New Pet</h2>
+      <h2>Edit Pet</h2>
       <form className="pet-form" onSubmit={submit}>
         {photo && <img alt="the pet" src={photo} />}
 
@@ -89,4 +80,4 @@ const NewPetModal = ({ onCancel, onSave }) => {
   );
 };
 
-export default NewPetModal;
+export default EditPetModal;

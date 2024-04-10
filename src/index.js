@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import NewPetModal from "./NewPetModal";
 import Modal from "react-modal";
+import NewPetModal from "./NewPetModal";
+import EditPetModal from "./EditPetModal";
 import { Pet } from "./Pet";
 import { listPets, createPet } from "./api";
 
@@ -12,6 +13,7 @@ const App = () => {
   const [pets, setPets] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [isNewPetOpen, setNewPetOpen] = useState(false);
+  const [currentPet, setCurrentPet] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -72,6 +74,10 @@ const App = () => {
     });
   };
 
+  const savePet = async (pet) => {
+    console.log("editing a pet", pet);
+  };
+
   return (
     <main>
       <h1>Adopt-a-Pet</h1>
@@ -82,7 +88,15 @@ const App = () => {
           <ul>
             {pets.map((pet) => (
               <li key={pet.id}>
-                <Pet pet={pet} />
+                {/* Restructructoring 3 */}
+                {/* <Pet pet={pet} /> */}
+                <Pet
+                  pet={pet}
+                  onEdit={() => {
+                    console.log("pet", pet);
+                    setCurrentPet(pet);
+                  }}
+                />
               </li>
             ))}
           </ul>
@@ -103,6 +117,14 @@ const App = () => {
           // isOpen={isNewPetOpen}
           onSave={addPet}
           onCancel={() => setNewPetOpen(false)}
+        />
+      )}
+
+      {currentPet && (
+        <EditPetModal
+          pet={currentPet}
+          onCancel={() => setCurrentPet(null)}
+          onSave={savePet}
         />
       )}
     </main>
