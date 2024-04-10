@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 import NewPetModal from "./NewPetModal";
 import Modal from "react-modal";
 import { Pet } from "./Pet";
+import { listPets, createPet } from "./api";
+
 import "./index.css";
 
 const App = () => {
@@ -12,20 +14,27 @@ const App = () => {
   const [isNewPetOpen, setNewPetOpen] = useState(false);
 
   useEffect(() => {
-    async function getData() {
-      setLoading(true);
+    setLoading(true);
+    listPets()
+      .then((pets) => setPets(pets))
+      .finally(() => setLoading(false));
 
-      try {
-        const res = await fetch("http://localhost:3001/pets");
-        const pets = await res.json();
-        setPets(pets);
-        setLoading(false);
-      } catch (err) {
-        console.warn(err);
-        setLoading(false);
-      }
-    }
-    getData();
+    // Restructructoring 1
+
+    // async function getData() {
+    //   setLoading(true);
+
+    //   try {
+    //     const res = await fetch("http://localhost:3001/pets");
+    //     const pets = await res.json();
+    //     setPets(pets);
+    //     setLoading(false);
+    //   } catch (err) {
+    //     console.warn(err);
+    //     setLoading(false);
+    //   }
+    // }
+    // getData();
   }, []);
 
   // Using Async Await
@@ -40,18 +49,27 @@ const App = () => {
     getData();
   }, []);
 
-  const addPet = async ({ name, kind, photo }) => {
-    // spread Operator
-    setPets([
-      ...pets,
-      {
-        id: Math.random(),
-        name,
-        kind,
-        photo,
-      },
-    ]);
-    setNewPetOpen(false);
+  // Restructructoring 2
+
+  // const addPet = async ({ name, kind, photo }) => {
+  //   // spread Operator
+  //   setPets([
+  //     ...pets,
+  //     {
+  //       id: Math.random(),
+  //       name,
+  //       kind,
+  //       photo,
+  //     },
+  //   ]);
+  //   setNewPetOpen(false);
+  // };
+
+  const addPet = async (pet) => {
+    return createPet(pet).then((newPet) => {
+      setPets([...pets, newPet]);
+      setNewPetOpen(false);
+    });
   };
 
   return (

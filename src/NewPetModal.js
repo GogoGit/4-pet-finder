@@ -1,21 +1,34 @@
 import { useState, useRef } from "react";
 import Modal from "react-modal";
 
-const NewPetModal = ({ isOpen, onCancel, onSave }) => {
+// const NewPetModal = ({ isOpen, onCancel, onSave }) => {
+const NewPetModal = ({ onCancel, onSave }) => {
   const [name, setName] = useState("");
   const [kind, setKind] = useState("");
   const [photo, setPhoto] = useState(null);
+  const [errors, setErrors] = useState(null);
+  const [saving, setSaving] = useState(false);
+
   const photoInput = useRef();
 
   const submit = (event) => {
     event.preventDefault();
+    setSaving(true);
     // this is the short cut for
     /* onSave({
         name:name,
         kind:kind,
         photo:photo,
     });  */
-    onSave({ name, kind, photo });
+    onSave({
+      name,
+      kind,
+      photo,
+    }).catch((error) => {
+      console.log(error);
+      setErrors(error);
+      setSaving(false);
+    });
   };
 
   const updatePhoto = () => {
@@ -41,11 +54,15 @@ const NewPetModal = ({ isOpen, onCancel, onSave }) => {
 
         <label htmlFor="name">Name</label>
         <input
+          //   require  //this wouild be front end validation
           type="text"
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+        {/* This is back end error checking since this comes from the server */}
+        {errors && errors.name && <div className="error">{errors.name}</div>}
+
         <label htmlFor="kind">Kind</label>
         <select
           name="kind"
@@ -57,10 +74,16 @@ const NewPetModal = ({ isOpen, onCancel, onSave }) => {
           <option value="cat">Cat</option>
           <option value="dog">Dog</option>
         </select>
-        <button type="button" onClick={onCancel}>
+
+        {/* This is back end error checking since this comes from the server */}
+        {errors && errors.kind && <div className="error">{errors.kind}</div>}
+
+        <button disabled={saving} type="button" onClick={onCancel}>
           Cancel
         </button>
-        <button type="submit">Save</button>
+        <button type="submit" disabled={saving}>
+          Save
+        </button>
       </form>
     </Modal>
   );
