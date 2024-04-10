@@ -15,6 +15,12 @@ const EditPetModal = ({ pet, onCancel, onSave }) => {
     setSaving(true);
     onSave({
       ...pet, //This is how we are getting the pet id back in???
+      /* comment from Dani W   
+        "Kevin I think what's happening is the spread operator is getting all the key val pairs from the pet object, 
+        but then we overwrite the name, kind and photo keys.
+        You can try it in the console. If you use the spread after the new fields btw you'll
+        end up with the original pet object { name: newname, kind: kind, ...pet }" */
+
       name,
       kind,
       photo,
