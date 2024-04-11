@@ -76,14 +76,16 @@ const NewPetModal = ({ onCancel, onSave }) => {
         {/* <button disabled={saving} type="button" onClick={onCancel}>
           Cancel
         </button> */}
-        <Button disabled={saving} onPress={onCancel}>
+        <Button class="react-aria-Button" disabled={saving} onPress={onCancel}>
           Cancel
         </Button>
 
         {/* <button type="submit" disabled={saving}>
           Save
         </button> */}
-        <Button onPress={() => submit}>Save</Button>
+        <Button class="react-aria-Button" onPress={() => submit}>
+          Save
+        </Button>
       </form>
     </Modal>
   );
