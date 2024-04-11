@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import NewPetModal from "./NewPetModal";
 import EditPetModal from "./EditPetModal";
 import { Pet } from "./Pet";
-import { listPets, createPet, updatePet } from "./api";
+import { listPets, createPet, updatePet, deletePet } from "./api";
 
 import "./index.css";
 
@@ -53,6 +53,18 @@ const App = () => {
     setCurrentPet(null);
   };
 
+  const removePet = (byePet) => {
+    const result = window.confirm(
+      `Are you sure you want to adopt ${byePet.name}`
+    );
+
+    if (result) {
+      deletePet(byePet).then(() => {
+        setPets((pets) => pets.filter((pet) => pet.id !== byePet.id));
+      });
+    }
+  };
+
   return (
     <main>
       <h1>Adopt-a-Pet</h1>
@@ -69,6 +81,9 @@ const App = () => {
                     console.log("pet", pet);
                     setCurrentPet(pet);
                   }}
+                  // onRemove={ removePed(pet) }   //This calls the function immediately!!!!! we don't want that.. do the following!
+                  on
+                  onRemove={() => removePet(pet)}
                 />
               </li>
             ))}

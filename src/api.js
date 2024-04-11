@@ -36,4 +36,12 @@ export const updatePet = (pet) => {
     .then((res) => res.json());
 };
 
+export const deletePet = (pet) => {
+  return fetch(`http://localhost:3001/pets/${pet.id}`, {
+    method: "DELETE",
+  })
+    .then(handleErrors)
+    .then((res) => res.json());
+};
+
 //   export {1, 2, 3}   //Short cut LOL
