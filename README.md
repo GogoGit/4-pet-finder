@@ -1,3 +1,52 @@
+HomeWork:
+
+1. Move the App component into its own file and re-import it back into index.js.
+1. Listen to this episode of Syntax (https://syntax.fm/show/751/ui-components-shadcn-tailwind-ui-headless-react-aria-radix-ui), select a modal from one of the UI libraries mentioned and implement it in the project replacing the React Modal currently in use.
+
+Using the following framework??
+https://react-spectrum.adobe.com/react-aria/getting-started.html
+
+install command: npm add react-aria-components
+
+result after install:
+added 112 packages, and audited 1871 packages in 17s
+
+    261 packages are looking for funding
+      run `npm fund` for details
+
+    8 vulnerabilities (2 moderate, 6 high)
+
+    To address all issues (including breaking changes), run:
+      npm audit fix --force
+
+    Run `npm audit` for details.
+
+How do we do this???  
+ Using the following code base: https://shoelace.style/ ???
+
+The following didn't work:
+
+Using the following code base: https://github.com/pettiboy/react-native-ui-buttons
+
+Install command: npm install --save react-native-ui-buttons \* Requires: react-native-vector-icons (https://github.com/oblador/react-native-vector-icons)
+Install command: npm install --save react-native-vector-icons
+
+Error Messages aftger install:
+added 13 packages, and audited 1772 packages in 4s
+
+261 packages are looking for funding
+run `npm fund` for details
+
+11 vulnerabilities (2 moderate, 9 high)
+
+To address all issues possible (including breaking changes), run:
+npm audit fix --force
+
+Some issues need review, and may require choosing
+a different dependency.
+
+Run `npm audit` for details.
+
 Error Message Note run the following in a new Terminal: npm install @babel/plugin-proposal-private-property-in-object
 
 # React and CRUD APIs

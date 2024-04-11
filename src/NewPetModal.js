@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import Modal from "react-modal";
 
+import { Button } from "react-aria-components";
+
 // const NewPetModal = ({ isOpen, onCancel, onSave }) => {
 const NewPetModal = ({ onCancel, onSave }) => {
   const [name, setName] = useState("");
@@ -70,12 +72,18 @@ const NewPetModal = ({ onCancel, onSave }) => {
         {/* This is back end error checking since this comes from the server */}
         {errors && errors.kind && <div className="error">{errors.kind}</div>}
 
-        <button disabled={saving} type="button" onClick={onCancel}>
+        {/* repace buttons with Aria Buttons */}
+        {/* <button disabled={saving} type="button" onClick={onCancel}>
           Cancel
-        </button>
-        <button type="submit" disabled={saving}>
+        </button> */}
+        <Button disabled={saving} onPress={onCancel}>
+          Cancel
+        </Button>
+
+        {/* <button type="submit" disabled={saving}>
           Save
-        </button>
+        </button> */}
+        <Button onPress={() => submit}>Save</Button>
       </form>
     </Modal>
   );
