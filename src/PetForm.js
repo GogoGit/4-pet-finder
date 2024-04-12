@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { Button } from "react-aria-components";
 
 const PetForm = ({ pet, onSave, onCancel }) => {
   const initialPet = pet || {
@@ -63,12 +64,15 @@ const PetForm = ({ pet, onSave, onCancel }) => {
         <option value="dog">Dog</option>
       </select>
       {errors && errors.kind && <div className="error">{errors.kind}</div>}
-      <button disabled={saving} type="button" onClick={onCancel}>
+      {/* <button disabled={saving} type="button" onClick={onCancel}>Cancel</button> */}
+      <Button disabled={saving} onPress={onCancel}>
         Cancel
-      </button>
-      <button disabled={saving} type="submit">
+      </Button>
+
+      {/* <button disabled={saving} type="submit">Save</button> */}
+      <Button disabled={saving} type="submit">
         Save
-      </button>
+      </Button>
     </form>
   );
 };

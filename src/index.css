@@ -6,7 +6,43 @@ html {
   --white: #faf7ff;
   --blue: #007eb6;
   --green: #bada55;
+
+  --text-color: #faf7ff;
+  --button-background: #a5531d;
+  --border-color: #765139;
+  --button-background-pressed: #612801;
+  --border-color-pressed: #231811;
+  --focus-ring-color: #1fa51d;
 }
+
+.react-aria-Button {
+  display: block;
+  color: var(--text-color);
+  background: var(--button-background);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  appearance: none;
+  vertical-align: middle;
+  font-size: 1rem;
+  text-align: center;
+  /* margin: 0; */
+  margin: auto;
+  outline: none;
+  padding: 6px 10px;
+  text-decoration: none;
+
+  &[data-pressed] {
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.1);
+    background: var(--button-background-pressed);
+    border-color: var(--border-color-pressed);
+  }
+
+  &[data-focus-visible] {
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: -1px;
+  }
+}
+
 body {
   background: var(--white);
   color: var(--blue);
@@ -160,14 +196,40 @@ ul {
   margin: 0 auto;
 }
 .pet-form button {
-  display: block;
+  /* display: block;
   margin-right: auto;
   border-radius: 4px;
   padding: 6px 16px;
   font-size: 22px;
   background: #ccc;
   color: #fff;
-  border: none;
+  border: none; */
+
+  display: block;
+  color: var(--text-color);
+  background: var(--button-background);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  appearance: none;
+
+  font-size: 1rem;
+  text-align: center;
+  /* margin: 0; */
+  /* margin: auto; */
+  outline: none;
+  padding: 6px 10px;
+  text-decoration: none;
+
+  &[data-pressed] {
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.1);
+    background: var(--button-background-pressed);
+    border-color: var(--border-color-pressed);
+  }
+
+  &[data-focus-visible] {
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: -1px;
+  }
 }
 .pet-form button + button {
   font-weight: bold;
