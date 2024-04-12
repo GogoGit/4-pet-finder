@@ -3,19 +3,6 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-html {
-  --white: #faf7ff;
-  --blue: #007eb6;
-  --green: #bada55;
-
-  --text-color: #faf7ff;
-  --button-background: #a5531d;
-  --border-color: #765139;
-  --button-background-pressed: #612801;
-  --border-color-pressed: #231811;
-  --focus-ring-color: #1fa51d;
-}
-
 .react-aria-Button {
   color: var(--text-color);
   background: var(--button-background);
@@ -42,6 +29,11 @@ html {
   }
 }
 
+html {
+  --white: #faf7ff;
+  --blue: #007eb6;
+  --green: #bada55;
+}
 body {
   background: var(--white);
   color: var(--blue);

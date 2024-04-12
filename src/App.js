@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+
+import { Button } from "react-aria-components";
 // import { createRoot } from "react-dom/client";
 
 // import Modal from "react-modal";
@@ -10,7 +12,7 @@ import { listPets, createPet, updatePet } from "./api";
 // import "./index.css";
 
 const App = () => {
-// export function  App () {
+  // export function  App () {
   // Destructure State and create State
   const [pets, setPets] = useState([]);
   const [isLoading, setLoading] = useState(false);
@@ -76,6 +78,9 @@ const App = () => {
             ))}
           </ul>
           <button onClick={() => setNewPetOpen(true)}>Add a Pet</button>
+          <div>
+            <Button onPress={() => alert("Hello world!")}>Press me</Button>
+          </div>
         </>
       )}
 
@@ -103,8 +108,5 @@ const App = () => {
 // const root = createRoot(container);
 // root.render(<App />);
 
-
-
-
-export { App };     //Why does this work vs Below
+export { App }; //Why does this work vs Below
 // export default App;  //NOT WORKING???
